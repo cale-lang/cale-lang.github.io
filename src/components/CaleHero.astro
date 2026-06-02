@@ -1,0 +1,14 @@
+---
+import DefaultHero from '@astrojs/starlight/components/Hero.astro';
+import OrbitSignal from './OrbitSignal.jsx';
+---
+
+<section class="cale-hero-frame">
+  <OrbitSignal client:visible />
+  <div class="cale-hero-content">
+    <DefaultHero {...Astro.props}>
+      <slot />
+    </DefaultHero>
+  </div>
+</section>
+
