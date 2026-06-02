@@ -26,6 +26,7 @@ export default defineConfig({
       customCss: ['./src/styles/cale.css'],
       components: {
         Hero: './src/components/CaleHero.astro',
+        ThemeProvider: './src/components/CaleThemeProvider.astro',
       },
       social: [
         {

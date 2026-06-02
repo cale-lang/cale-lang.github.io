@@ -7,6 +7,10 @@ description: Cale 사용 준비와 현재 배포 상태
 
 Cale은 아직 일반 사용자용 안정 배포판이 아닙니다. 지금은 compiler, runtime, Lacail debugger, Qstar tooling이 빠르게 성장하는 개발 단계입니다.
 
+:::note[현재 이 사이트의 역할]
+이 사이트는 Cale의 상태, 설계 방향, 하위 프로젝트를 정리하는 정적 문서 사이트입니다. 실제 binary 다운로드는 아직 제공하지 않습니다.
+:::
+
 ## 소스에서 빌드하기
 
 현재 라운드의 웹사이트는 배포 binary를 제공하지 않습니다. 실제 binary 배포는 GitHub Releases 기반으로 준비될 예정입니다.
@@ -29,8 +33,11 @@ make -C lacail check
 
 첫 공개 배포는 다음 항목을 기준으로 준비됩니다.
 
+:::caution[릴리즈 전 안내]
+현재 문서의 명령은 개발 저장소 기준입니다. 안정 release가 나오기 전까지는 build flag, target, artifact 이름이 바뀔 수 있습니다.
+:::
+
 - macOS 우선 native binary
 - GitHub Releases 기반 다운로드
 - checksum과 release note
 - Cale compiler, Lacail, Qstar를 구분한 artifact
-

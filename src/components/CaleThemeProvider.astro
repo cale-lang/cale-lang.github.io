@@ -1,0 +1,54 @@
+{/* 기본 진입은 밝은 테마로 둔다. 사용자가 고른 dark/auto 값은 유지한다. */}
+<script is:inline>
+  window.StarlightThemeProvider = (() => {
+    const storageKey = 'starlight-theme';
+    let rawTheme = null;
+
+    if (typeof localStorage !== 'undefined') {
+      rawTheme = localStorage.getItem(storageKey);
+      if (rawTheme === null) {
+        localStorage.setItem(storageKey, 'light');
+        rawTheme = 'light';
+      }
+    }
+
+    const parseTheme = (theme) =>
+      theme === 'auto' || theme === 'dark' || theme === 'light' ? theme : 'auto';
+    const storedTheme = rawTheme === null ? 'light' : parseTheme(rawTheme);
+    const preferredTheme = () =>
+      window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const activeTheme = storedTheme === 'auto' ? preferredTheme() : storedTheme;
+
+    document.documentElement.dataset.theme = activeTheme;
+
+    return {
+      updatePickers(theme = storedTheme) {
+        document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+          const select = picker.querySelector('select');
+          if (select) select.value = theme;
+
+          const tmpl = document.querySelector(`#theme-icons`);
+          const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+          if (newIcon) {
+            const oldIcon = picker.querySelector('svg.label-icon');
+            if (oldIcon) {
+              oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+            }
+          }
+        });
+      },
+    };
+  })();
+</script>
+
+<template id="theme-icons">
+  <svg aria-hidden="true" class="light" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Zm0 4a1 1 0 0 0 1-1v-1a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Zm0-18a1 1 0 0 0 1-1V2a1 1 0 1 0-2 0v1a1 1 0 0 0 1 1Zm10 8a1 1 0 0 0-1-1h-1a1 1 0 1 0 0 2h1a1 1 0 0 0 1-1ZM4 12a1 1 0 0 0-1-1H2a1 1 0 1 0 0 2h1a1 1 0 0 0 1-1Zm16.07 7.07a1 1 0 0 0 0-1.41l-.71-.71a1 1 0 1 0-1.41 1.41l.71.71a1 1 0 0 0 1.41 0ZM6.05 6.05a1 1 0 0 0 0-1.41l-.71-.71a1 1 0 0 0-1.41 1.41l.71.71a1 1 0 0 0 1.41 0Zm12.31 0 .71-.71a1 1 0 1 0-1.41-1.41l-.71.71a1 1 0 0 0 1.41 1.41ZM5.34 20.07l.71-.71a1 1 0 0 0-1.41-1.41l-.71.71a1 1 0 1 0 1.41 1.41Z" />
+  </svg>
+  <svg aria-hidden="true" class="dark" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M21 14.6a1 1 0 0 0-1.12-.19A8 8 0 0 1 9.6 4.12 1 1 0 0 0 8.48 3 10 10 0 1 0 21 14.6ZM12 20a8 8 0 0 1-6.55-12.6 10 10 0 0 0 11.15 11.15A7.95 7.95 0 0 1 12 20Z" />
+  </svg>
+  <svg aria-hidden="true" class="auto" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M5 4a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h5v2H8a1 1 0 1 0 0 2h8a1 1 0 1 0 0-2h-2v-2h5a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H5Zm0 2h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" />
+  </svg>
+</template>

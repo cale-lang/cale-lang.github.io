@@ -5,7 +5,7 @@ const nodes = [
   { label: 'FIR', angle: 74, radius: 58 },
   { label: 'BCIR', angle: 158, radius: 47 },
   { label: 'Sol', angle: 236, radius: 60 },
-  { label: 'Lacail', angle: 306, radius: 50 },
+  { label: 'Lacail', angle: 306, radius: 50, warm: true },
 ];
 
 export default function OrbitSignal() {
@@ -32,7 +32,7 @@ export default function OrbitSignal() {
       {points.map((point) => (
         <div
           key={point.label}
-          className="orbit-node"
+          className={point.warm ? 'orbit-node is-warm' : 'orbit-node'}
           style={{ left: `${point.x}%`, top: `${point.y}%` }}
         >
           {point.label}
@@ -42,4 +42,3 @@ export default function OrbitSignal() {
     </div>
   );
 }
-
