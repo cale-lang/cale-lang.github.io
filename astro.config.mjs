@@ -26,6 +26,7 @@ export default defineConfig({
       customCss: ['./src/styles/cale.css'],
       components: {
         Footer: './src/components/CaleFooter.astro',
+        Header: './src/components/CaleHeader.astro',
         Hero: './src/components/CaleHero.astro',
         ThemeProvider: './src/components/CaleThemeProvider.astro',
       },
@@ -41,6 +42,9 @@ export default defineConfig({
           label: 'Cale',
           items: [
             { label: 'Overview', slug: '' },
+            { label: 'Install', slug: 'install' },
+            { label: 'Docs', slug: 'docs' },
+            { label: 'Blog', slug: 'blog' },
             { label: 'Getting Started', slug: 'getting-started' },
             { label: 'Language', slug: 'language' },
             { label: 'Compiler', slug: 'compiler' },

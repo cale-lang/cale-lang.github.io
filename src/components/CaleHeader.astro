@@ -1,0 +1,52 @@
+---
+import config from 'virtual:starlight/user-config';
+
+import LanguageSelect from 'virtual:starlight/components/LanguageSelect';
+import Search from 'virtual:starlight/components/Search';
+import SiteTitle from 'virtual:starlight/components/SiteTitle';
+import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import ThemeSelect from 'virtual:starlight/components/ThemeSelect';
+
+const shouldRenderSearch =
+  config.pagefind || config.components.Search !== '@astrojs/starlight/components/Search.astro';
+
+const pathname = Astro.url.pathname;
+const localePrefix = pathname.startsWith('/en/') ? '/en' : pathname.startsWith('/ja/') ? '/ja' : '';
+const withLocale = (path: string) => `${localePrefix}${path}`;
+
+const navItems = [
+  { label: 'Install', href: withLocale('/install/') },
+  { label: 'Docs', href: withLocale('/docs/') },
+  { label: 'Blog', href: withLocale('/blog/') },
+  { label: 'Releases', href: withLocale('/releases/') },
+  { label: 'Lacail', href: withLocale('/lacail/') },
+  { label: 'GitHub', href: 'https://github.com/cale-lang/cale-lang.github.io', external: true },
+];
+---
+
+<div class="header cale-header">
+  <div class="title-wrapper sl-flex">
+    <SiteTitle />
+  </div>
+  <nav class="cale-top-nav print:hidden" aria-label="Cale primary navigation">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        rel={item.external ? 'noreferrer' : undefined}
+        target={item.external ? '_blank' : undefined}
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+  <div class="cale-header-search sl-flex print:hidden">
+    {shouldRenderSearch && <Search />}
+  </div>
+  <div class="sl-hidden md:sl-flex print:hidden right-group">
+    <div class="sl-flex social-icons">
+      <SocialIcons />
+    </div>
+    <ThemeSelect />
+    <LanguageSelect />
+  </div>
+</div>
