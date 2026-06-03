@@ -1,0 +1,246 @@
+---
+type Locale = 'ko' | 'en' | 'ja';
+
+const { locale = 'ko' } = Astro.props as { locale?: Locale };
+
+const copy = {
+  ko: {
+    intro: {
+      eyebrow: '프로젝트 상태',
+      title: '지금의 Cale',
+      body:
+        'Cale은 C를 버리는 프로젝트가 아닙니다. C ABI, 낮은 런타임 의존성, OS와 커널 친화성을 유지하면서 위험한 기본값을 컴파일러가 이해할 수 있는 의미론으로 끌어올리는 시스템 언어와 컴파일러 프로젝트입니다.',
+      note:
+        '현재 C source를 SIR, FIR, BCIR, Sol 경로로 낮추는 실제 컴파일러 파이프라인이 있고, Lacail은 그 산출물을 읽는 독립 디버거로 분리되고 있습니다.',
+      items: [
+        {
+          label: 'C ABI',
+          value: '공존',
+          text: '기존 C 생태계와 OS 경계를 전제로 설계합니다.',
+        },
+        {
+          label: 'Compiler',
+          value: '동작 중',
+          text: 'SIR/FIR/BCIR/Sol을 거치는 낮은 수준의 파이프라인을 키우고 있습니다.',
+        },
+        {
+          label: 'Lacail',
+          value: '독립화',
+          text: 'Cale 내부 모듈이 아니라 artifact consumer 디버거로 발전합니다.',
+        },
+      ],
+    },
+    pipeline: {
+      eyebrow: '컴파일러 파이프라인',
+      title: 'source 의미를 잃지 않고 낮은 단계로 내려갑니다',
+      body:
+        'R3의 홈 구조는 Cale을 단순한 문서 목록이 아니라 실제 컴파일러 프로젝트로 읽히게 만드는 데 초점을 둡니다. 각 IR은 낮은 수준으로 내려가되, 나중에 디버거와 의미론 분석기가 다시 설명할 수 있는 흔적을 남기는 방향으로 정리합니다.',
+      stages: [
+        { name: 'C source', role: '입력', text: '기존 C lane과 ABI를 받아들이는 출발점' },
+        { name: 'SIR', role: 'source IR', text: 'source 구조를 보존하며 다음 단계로 전달' },
+        { name: 'FIR', role: 'flow IR', text: '제어 흐름과 값 흐름을 더 명시적으로 정리' },
+        { name: 'BCIR', role: 'backend IR', text: 'backend와 codegen에 가까운 중간 표현' },
+        { name: 'Sol', role: 'lowered IR', text: '낮은 수준의 실행 의미와 연결되는 단계' },
+      ],
+    },
+    lacail: {
+      eyebrow: 'Lacail 의미론 디버거',
+      title: 'LLDB처럼 멈추고, Cale artifact가 있으면 더 깊게 설명합니다',
+      body:
+        'Lacail은 Cale 내부 디버그 모듈이 아니라 독립 top-level 프로젝트입니다. 일반 executable, object file, DWARF, source map을 읽고, Cale bundle이 있으면 semantic trace와 UB fact를 source-level stop report에 연결하는 방향으로 성장합니다.',
+      facts: [
+        ['stop', 'break main -> pc 0x100003f80'],
+        ['source', 'main.c:42:17  value = lhs + rhs'],
+        ['symbol', 'main + 0x34'],
+        ['ub fact', 'signed overflow candidate'],
+        ['trace', 'FIR %sum -> BCIR v17 -> Sol r0'],
+      ],
+      cta: 'Lacail 문서 보기',
+      href: '/lacail/',
+    },
+    releases: {
+      eyebrow: 'Releases',
+      title: '바이너리 배포는 GitHub Releases 기반으로 준비합니다',
+      body:
+        '지금 사이트는 Cale의 구조와 현재 상태를 정리하는 장소입니다. 실제 배포가 준비되면 macOS 우선으로 시작하고, Linux와 Windows는 compile 가능한 경계부터 넓혀갑니다.',
+      cta: '릴리즈 계획 보기',
+      href: '/releases/',
+    },
+  },
+  en: {
+    intro: {
+      eyebrow: 'Project Status',
+      title: 'Cale today',
+      body:
+        'Cale is a systems language and compiler project designed to coexist with the C ABI. It keeps the low-level environment that makes C useful, while moving dangerous defaults into compiler-visible semantics.',
+      note:
+        'The project already has a C source to SIR, FIR, BCIR, and Sol pipeline. Lacail is growing as an independent debugger that consumes Cale artifacts instead of linking to Cale internals.',
+      items: [
+        { label: 'C ABI', value: 'coexist', text: 'Designed around existing C and OS boundaries.' },
+        { label: 'Compiler', value: 'active', text: 'A lowering pipeline through SIR, FIR, BCIR, and Sol.' },
+        { label: 'Lacail', value: 'standalone', text: 'An artifact consumer debugger, not an internal Cale module.' },
+      ],
+    },
+    pipeline: {
+      eyebrow: 'Compiler Pipeline',
+      title: 'Lowering source meaning without throwing it away',
+      body:
+        'The homepage now presents Cale as a working compiler project. The pipeline section gives visitors a compact mental model before they enter the longer documentation.',
+      stages: [
+        { name: 'C source', role: 'input', text: 'Existing C source and ABI entry point' },
+        { name: 'SIR', role: 'source IR', text: 'Preserves source structure for later stages' },
+        { name: 'FIR', role: 'flow IR', text: 'Makes control and value flow more explicit' },
+        { name: 'BCIR', role: 'backend IR', text: 'Moves closer to backend lowering' },
+        { name: 'Sol', role: 'lowered IR', text: 'Connects to low-level execution meaning' },
+      ],
+    },
+    lacail: {
+      eyebrow: 'Lacail Semantic Debugger',
+      title: 'Stop like LLDB, explain more when Cale artifacts exist',
+      body:
+        'Lacail is a standalone debugger project. It should read ordinary executables, object files, DWARF, and source maps, then add semantic traces and UB facts when Cale bundles are available.',
+      facts: [
+        ['stop', 'break main -> pc 0x100003f80'],
+        ['source', 'main.c:42:17  value = lhs + rhs'],
+        ['symbol', 'main + 0x34'],
+        ['ub fact', 'signed overflow candidate'],
+        ['trace', 'FIR %sum -> BCIR v17 -> Sol r0'],
+      ],
+      cta: 'Read Lacail docs',
+      href: '/en/lacail/',
+    },
+    releases: {
+      eyebrow: 'Releases',
+      title: 'Binary releases will be based on GitHub Releases',
+      body:
+        'This site is currently the project map and documentation home. Real downloads will be linked here when the release process is ready.',
+      cta: 'Release plan',
+      href: '/en/releases/',
+    },
+  },
+  ja: {
+    intro: {
+      eyebrow: '準備中',
+      title: 'Japanese content is being prepared',
+      body:
+        'このページは日本語ドキュメントのプレースホルダーです。CaleはC ABIと共存しながら、より明示的な意味論と解析可能なコンパイラパイプラインを目指します。',
+      note:
+        '以下の構成は今後の日本語ドキュメントのための初期レイアウトです。',
+      items: [
+        { label: 'C ABI', value: 'coexist', text: '既存のCとOS境界を前提にします。' },
+        { label: 'Compiler', value: 'pipeline', text: 'SIR, FIR, BCIR, Solの流れを整理します。' },
+        { label: 'Lacail', value: 'debugger', text: '独立したデバッガープロジェクトです。' },
+      ],
+    },
+    pipeline: {
+      eyebrow: 'Compiler Pipeline',
+      title: 'Pipeline overview placeholder',
+      body:
+        'Japanese documentation is being prepared. This section keeps the homepage structure aligned with Korean and English.',
+      stages: [
+        { name: 'C source', role: 'input', text: 'C-compatible entry point' },
+        { name: 'SIR', role: 'source IR', text: 'Source-preserving intermediate representation' },
+        { name: 'FIR', role: 'flow IR', text: 'Control and value flow' },
+        { name: 'BCIR', role: 'backend IR', text: 'Backend-facing representation' },
+        { name: 'Sol', role: 'lowered IR', text: 'Low-level execution meaning' },
+      ],
+    },
+    lacail: {
+      eyebrow: 'Lacail',
+      title: 'Semantic debugger placeholder',
+      body:
+        'Lacail documentation in Japanese is being prepared. The debugger direction is shared with the Korean and English pages.',
+      facts: [
+        ['stop', 'break main -> pc 0x100003f80'],
+        ['source', 'main.c:42:17'],
+        ['symbol', 'main + 0x34'],
+        ['ub fact', 'placeholder'],
+        ['trace', 'FIR -> BCIR -> Sol'],
+      ],
+      cta: 'Lacail',
+      href: '/ja/lacail/',
+    },
+    releases: {
+      eyebrow: 'Releases',
+      title: 'GitHub Releases placeholder',
+      body:
+        'Japanese release notes are being prepared. Future binaries will be distributed through GitHub Releases.',
+      cta: 'Releases',
+      href: '/ja/releases/',
+    },
+  },
+};
+
+const t = copy[locale] ?? copy.ko;
+---
+
+<div class="cale-home-flow" data-locale={locale}>
+  <section class="cale-home-section cale-home-status" aria-labelledby={`cale-home-status-${locale}`}>
+    <div class="cale-section-copy">
+      <p class="cale-section-eyebrow">{t.intro.eyebrow}</p>
+      <h2 id={`cale-home-status-${locale}`}>{t.intro.title}</h2>
+      <p>{t.intro.body}</p>
+      <p>{t.intro.note}</p>
+    </div>
+    <div class="cale-status-deck" aria-label={t.intro.title}>
+      {t.intro.items.map((item) => (
+        <article class="cale-status-card">
+          <span>{item.label}</span>
+          <strong>{item.value}</strong>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="cale-home-section cale-home-pipeline" aria-labelledby={`cale-home-pipeline-${locale}`}>
+    <div class="cale-section-copy">
+      <p class="cale-section-eyebrow">{t.pipeline.eyebrow}</p>
+      <h2 id={`cale-home-pipeline-${locale}`}>{t.pipeline.title}</h2>
+      <p>{t.pipeline.body}</p>
+    </div>
+    <div class="cale-pipeline-visual" aria-label={t.pipeline.eyebrow}>
+      <div class="cale-pipeline-rail" aria-hidden="true"></div>
+      {t.pipeline.stages.map((stage, index) => (
+        <article class={`cale-pipeline-stage cale-pipeline-stage-${index + 1}`}>
+          <span class="cale-stage-number">{String(index + 1).padStart(2, '0')}</span>
+          <strong>{stage.name}</strong>
+          <em>{stage.role}</em>
+          <p>{stage.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="cale-home-section cale-home-lacail" aria-labelledby={`cale-home-lacail-${locale}`}>
+    <div class="cale-section-copy">
+      <p class="cale-section-eyebrow">{t.lacail.eyebrow}</p>
+      <h2 id={`cale-home-lacail-${locale}`}>{t.lacail.title}</h2>
+      <p>{t.lacail.body}</p>
+      <a class="cale-text-link" href={t.lacail.href}>{t.lacail.cta}</a>
+    </div>
+    <div class="cale-debug-panel" aria-label={t.lacail.eyebrow}>
+      <div class="cale-debug-toolbar">
+        <span>lacail explain-pc</span>
+        <span>semantic trace</span>
+      </div>
+      <dl>
+        {t.lacail.facts.map(([label, value]) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="cale-release-band" aria-labelledby={`cale-home-releases-${locale}`}>
+    <div>
+      <p class="cale-section-eyebrow">{t.releases.eyebrow}</p>
+      <h2 id={`cale-home-releases-${locale}`}>{t.releases.title}</h2>
+      <p>{t.releases.body}</p>
+    </div>
+    <a class="cale-release-link" href={t.releases.href}>{t.releases.cta}</a>
+  </section>
+</div>

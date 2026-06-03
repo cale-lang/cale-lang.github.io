@@ -628,6 +628,354 @@ html:root:not([data-has-sidebar]) {
   }
 }
 
+.cale-home-flow {
+  display: grid;
+  gap: clamp(4rem, 8vw, 6.5rem);
+  margin-block: clamp(2.5rem, 6vw, 4.75rem) clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.cale-home-section {
+  position: relative;
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+}
+
+.cale-section-copy {
+  max-width: 48rem;
+}
+
+.cale-section-eyebrow {
+  margin: 0 0 0.65rem;
+  color: var(--cale-primary);
+  font-size: 0.78rem;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.cale-section-copy h2,
+.cale-release-band h2 {
+  margin: 0;
+  color: var(--cale-text);
+  font-size: clamp(2rem, 4.4vw, 3.2rem);
+  line-height: 1.08;
+}
+
+.cale-section-copy p,
+.cale-release-band p {
+  color: var(--cale-text-muted);
+}
+
+.cale-status-deck {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.cale-status-card,
+.cale-pipeline-stage,
+.cale-debug-panel {
+  border: 1px solid color-mix(in srgb, var(--cale-border) 80%, transparent);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cale-surface) 88%, transparent), color-mix(in srgb, var(--cale-surface-muted) 54%, transparent)),
+    color-mix(in srgb, var(--cale-surface) 82%, transparent);
+  box-shadow: 0 18px 46px rgba(23, 35, 28, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.cale-status-card {
+  display: grid;
+  min-height: 12rem;
+  align-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem;
+}
+
+.cale-status-card span,
+.cale-stage-number,
+.cale-debug-toolbar,
+.cale-debug-panel dt {
+  color: var(--cale-text-muted);
+  font-size: 0.76rem;
+  font-weight: 720;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cale-status-card strong {
+  color: var(--cale-primary);
+  font-size: clamp(1.55rem, 3vw, 2.35rem);
+  line-height: 1;
+}
+
+.cale-status-card p {
+  margin: 0;
+  color: var(--cale-text-muted);
+  font-size: 0.96rem;
+  line-height: 1.62;
+}
+
+.cale-home-pipeline {
+  grid-template-columns: minmax(18rem, 0.9fr) minmax(0, 1.6fr);
+  align-items: center;
+}
+
+.cale-pipeline-visual {
+  position: relative;
+  display: grid;
+  min-height: 32rem;
+  perspective: 1100px;
+}
+
+.cale-pipeline-visual::before {
+  position: absolute;
+  inset: 12% 4%;
+  content: "";
+  background:
+    radial-gradient(circle at 28% 34%, color-mix(in srgb, var(--cale-primary) 16%, transparent), transparent 34%),
+    radial-gradient(circle at 78% 58%, color-mix(in srgb, var(--cale-orange) 13%, transparent), transparent 36%),
+    linear-gradient(90deg, color-mix(in srgb, var(--cale-primary) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--cale-primary) 7%, transparent) 1px, transparent 1px);
+  background-size: auto, auto, 3rem 3rem, 3rem 3rem;
+  filter: blur(0.2px);
+  opacity: 0.82;
+}
+
+.cale-pipeline-rail {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  left: 5%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cale-primary), var(--cale-cyan), var(--cale-orange));
+  box-shadow: 0 0 32px color-mix(in srgb, var(--cale-primary) 22%, transparent);
+  transform: translateY(-50%) rotate(-4deg);
+}
+
+.cale-pipeline-stage {
+  position: absolute;
+  display: grid;
+  width: min(13.25rem, 38%);
+  gap: 0.45rem;
+  padding: 1rem;
+  transform-style: preserve-3d;
+}
+
+.cale-pipeline-stage strong {
+  color: var(--cale-text);
+  font-size: 1.35rem;
+  line-height: 1.08;
+}
+
+.cale-pipeline-stage em {
+  color: var(--cale-primary);
+  font-style: normal;
+  font-weight: 700;
+}
+
+.cale-pipeline-stage p {
+  margin: 0;
+  color: var(--cale-text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.cale-pipeline-stage-1 {
+  top: 3%;
+  left: 2%;
+  transform: rotateX(7deg) rotateY(-12deg) rotateZ(-2deg);
+}
+
+.cale-pipeline-stage-2 {
+  top: 18%;
+  left: 28%;
+  transform: rotateX(5deg) rotateY(-5deg) rotateZ(2deg);
+}
+
+.cale-pipeline-stage-3 {
+  top: 48%;
+  left: 10%;
+  transform: rotateX(8deg) rotateY(8deg) rotateZ(-2deg);
+}
+
+.cale-pipeline-stage-4 {
+  top: 7%;
+  right: 2%;
+  transform: rotateX(7deg) rotateY(12deg) rotateZ(2deg);
+}
+
+.cale-pipeline-stage-5 {
+  right: 12%;
+  bottom: 2%;
+  transform: rotateX(9deg) rotateY(5deg) rotateZ(-1deg);
+}
+
+.cale-home-lacail {
+  grid-template-columns: minmax(18rem, 0.92fr) minmax(0, 1.08fr);
+  align-items: center;
+}
+
+.cale-text-link,
+.cale-release-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 2.6rem;
+  border: 1px solid color-mix(in srgb, var(--cale-primary) 28%, var(--cale-border));
+  border-radius: 999px;
+  padding-inline: 1.05rem;
+  background: color-mix(in srgb, var(--cale-primary-low) 54%, var(--cale-surface));
+  color: var(--cale-primary);
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.cale-text-link:hover,
+.cale-release-link:hover {
+  border-color: var(--cale-primary);
+  background: color-mix(in srgb, var(--cale-primary-low) 78%, var(--cale-surface));
+  color: var(--cale-primary-hover);
+}
+
+.cale-debug-panel {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  background:
+    radial-gradient(circle at 68% 18%, color-mix(in srgb, var(--cale-primary) 16%, transparent), transparent 32%),
+    linear-gradient(180deg, color-mix(in srgb, var(--cale-surface) 94%, transparent), color-mix(in srgb, var(--cale-surface-muted) 70%, transparent));
+}
+
+.cale-debug-panel::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--cale-primary) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--cale-primary) 5%, transparent) 1px, transparent 1px);
+  background-size: 2.7rem 2.7rem;
+  mask-image: linear-gradient(90deg, black, transparent 85%);
+  pointer-events: none;
+}
+
+.cale-debug-toolbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--cale-border);
+  padding: 0.9rem 1rem;
+  background: color-mix(in srgb, var(--cale-surface) 72%, transparent);
+}
+
+.cale-debug-panel dl {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0.7rem 1rem 1rem;
+}
+
+.cale-debug-panel dl > div {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 0.32fr) 1fr;
+  gap: 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--cale-border) 68%, transparent);
+  padding-block: 0.78rem;
+}
+
+.cale-debug-panel dl > div:last-child {
+  border-bottom: 0;
+}
+
+.cale-debug-panel dd {
+  margin: 0;
+  color: var(--cale-text);
+  font-family: var(--sl-font-mono);
+  font-size: 0.9rem;
+}
+
+.cale-release-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: center;
+  border-block: 1px solid color-mix(in srgb, var(--cale-primary) 18%, var(--cale-border));
+  padding-block: clamp(2rem, 5vw, 3.25rem);
+}
+
+:root[data-theme="dark"] .cale-status-card,
+:root[data-theme="dark"] .cale-pipeline-stage,
+:root[data-theme="dark"] .cale-debug-panel {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cale-surface) 88%, transparent), color-mix(in srgb, var(--cale-surface-muted) 68%, transparent)),
+    var(--cale-surface);
+  box-shadow: 0 20px 58px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 58rem) {
+  .cale-home-flow {
+    gap: 3.75rem;
+    margin-block: 2.25rem 4rem;
+  }
+
+  .cale-status-deck,
+  .cale-home-pipeline,
+  .cale-home-lacail,
+  .cale-release-band {
+    grid-template-columns: 1fr;
+  }
+
+  .cale-status-deck {
+    gap: 0.85rem;
+  }
+
+  .cale-status-card {
+    min-height: auto;
+  }
+
+  .cale-pipeline-visual {
+    min-height: auto;
+    gap: 0.85rem;
+    perspective: none;
+  }
+
+  .cale-pipeline-visual::before {
+    inset: -1rem 0;
+  }
+
+  .cale-pipeline-rail {
+    top: 0;
+    bottom: 0;
+    left: 1.1rem;
+    width: 2px;
+    height: auto;
+    transform: none;
+  }
+
+  .cale-pipeline-stage {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: auto;
+    margin-left: 2.25rem;
+    transform: none;
+  }
+
+  .cale-debug-panel dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .cale-release-link {
+    justify-content: center;
+  }
+}
+
 .cale-footer {
   flex-direction: column;
   gap: 1.35rem;
