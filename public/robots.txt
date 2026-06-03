@@ -1,0 +1,22 @@
+# Cale crawler policy
+# https://cale.tools is open for search engines and AI assistants.
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-AdsBot
+Allow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://cale.tools/sitemap-index.xml

@@ -1,0 +1,23 @@
+# Cale crawler access policy
+# robots.txt is the authoritative crawler control file.
+
+site: https://cale.tools
+default_policy: allow
+
+search:
+  google: allow
+  sitemap: https://cale.tools/sitemap-index.xml
+
+ai_access:
+  policy: allow
+  user_agents:
+    - OAI-SearchBot
+    - GPTBot
+    - ChatGPT-User
+    - OAI-AdsBot
+    - "*"
+
+notes:
+  - This YAML file is an advisory machine-readable summary.
+  - Crawlers should use https://cale.tools/robots.txt for authoritative robots rules.
+  - Cale intends public documentation pages to be reachable by search engines and AI assistants.
