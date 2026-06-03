@@ -25,6 +25,7 @@ export default defineConfig({
       },
       customCss: ['./src/styles/cale.css'],
       components: {
+        Footer: './src/components/CaleFooter.astro',
         Hero: './src/components/CaleHero.astro',
         ThemeProvider: './src/components/CaleThemeProvider.astro',
       },

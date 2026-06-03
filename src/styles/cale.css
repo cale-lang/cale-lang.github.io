@@ -260,6 +260,10 @@ body {
     var(--cale-bg);
 }
 
+html:root:not([data-has-sidebar]) {
+  --sl-content-width: min(82rem, calc(100vw - 5rem));
+}
+
 :root[data-theme="dark"] .cale-hero-frame {
   background:
     linear-gradient(180deg, rgba(13, 25, 20, 0.94), rgba(7, 16, 13, 0.98)),
@@ -295,6 +299,8 @@ body {
 .cale-hero-content .hero {
   min-height: 30rem;
   align-items: center;
+  box-sizing: border-box;
+  padding-inline: clamp(2rem, 4.5vw, 5rem);
 }
 
 .cale-hero-content .hero > img {
@@ -441,9 +447,41 @@ body {
 
   .cale-hero-content .hero {
     min-height: 26rem;
+    padding-inline: clamp(1.25rem, 6vw, 2rem);
   }
 
   .cale-hero-content .tagline {
     font-size: 1rem;
   }
+}
+
+.cale-footer {
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.cale-footer-meta {
+  flex-wrap: wrap;
+  gap: 0.75rem 3rem;
+  justify-content: space-between;
+  margin-top: 3rem;
+  color: var(--cale-text-muted);
+  font-size: var(--sl-text-sm);
+}
+
+.cale-footer-meta > p:only-child {
+  margin-inline-start: auto;
+}
+
+.cale-footer-legal {
+  display: grid;
+  gap: 0.25rem;
+  border-top: 1px solid var(--cale-border);
+  padding-block: 1.15rem 1.6rem;
+  color: var(--cale-text-muted);
+  font-size: var(--sl-text-xs);
+}
+
+.cale-footer-legal p {
+  margin: 0;
 }
