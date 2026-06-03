@@ -1,0 +1,378 @@
+---
+type Locale = 'ko' | 'en' | 'ja';
+
+const { locale = 'ko' } = Astro.props as { locale?: Locale };
+
+const repoUrl = 'https://github.com/deeyed/cale.git';
+
+const copy = {
+  ko: {
+    status: 'Source build only',
+    title: 'Cale 설치는 지금 source build가 기준입니다',
+    body:
+      'Cale은 아직 일반 사용자용 binary release를 배포하지 않습니다. 지금은 저장소를 직접 받아 빌드하고, 향후 macOS 우선 GitHub Releases binary가 준비되면 이 페이지에 같은 흐름으로 curl/archive download 명령을 붙입니다.',
+    actions: {
+      release: 'macOS binary',
+      archive: 'Archive download',
+      command: '명령 복사',
+    },
+    alerts: {
+      release: 'GitHub Releases 기반 binary 배포는 아직 준비 중입니다.',
+      archive: 'Source archive와 platform archive download는 release 라운드에서 연결합니다.',
+      command: '명령 복사 기능은 다음 설치 라운드에서 연결합니다. 지금은 화면의 명령을 그대로 실행하면 됩니다.',
+    },
+    tabs: [
+      {
+        key: 'source',
+        label: 'Source',
+        title: '권장 경로: source build',
+        body:
+          '현재 가장 정확한 설치 경로입니다. Cale compiler, Lacail, Qstar를 각각 Makefile 기준으로 확인합니다.',
+      },
+      {
+        key: 'release',
+        label: 'Release',
+        title: '예정 경로: GitHub Releases',
+        body:
+          'macOS binary를 먼저 준비하고, 이후 Linux와 Windows artifact를 같은 페이지에 추가할 수 있게 구조만 먼저 둡니다.',
+      },
+      {
+        key: 'developer',
+        label: 'Developer build',
+        title: '개발자 경로: 전체 check와 하위 프로젝트 check',
+        body:
+          '컴파일러 본체와 독립 도구의 경계를 확인하면서 개발하는 경로입니다. nightly나 dev artifact가 생기면 이 탭에 붙입니다.',
+      },
+    ],
+    platforms: [
+      ['macOS', '우선 지원', 'source build 가능. 향후 첫 binary release 대상입니다.'],
+      ['Linux', '확장 대상', 'compile/check 경계를 유지하며 ELF와 platform layer를 넓혀갑니다.'],
+      ['Windows', 'compile stub', 'COFF/platform diagnostic을 안정화하며 단계적으로 넓혀갑니다.'],
+    ],
+    tools: [
+      ['Cale compiler', 'root Makefile', 'root make와 check 중심의 source build 경로입니다.'],
+      ['Lacail', 'lacail/Makefile', '독립 debugger 프로젝트이며 Cale 본체 없이 lacail check로 확인합니다.'],
+      ['Qstar', 'qstar/Makefile', 'Cale 본체와 분리된 도구이며 qstar check로 확인합니다.'],
+    ],
+    commands: [
+      {
+        title: '저장소 받기',
+        lines: [`git clone ${repoUrl}`, 'cd cale'],
+      },
+      {
+        title: 'Cale compiler',
+        lines: ['make', 'make check'],
+      },
+      {
+        title: '독립 도구 확인',
+        lines: ['make -C lacail check', 'make -C qstar check'],
+      },
+    ],
+    future: [
+      'release binary가 생기면 이 페이지의 Release 탭에 curl 명령과 archive download 버튼을 추가합니다.',
+      'source build 명령은 계속 유지해서 binary가 없는 platform에서도 진입점을 잃지 않게 합니다.',
+      'Lacail과 Qstar는 Cale 내부 모듈이 아니라 독립 도구의 빌드 상태로 분리해 표기합니다.',
+    ],
+  },
+  en: {
+    status: 'Source build only',
+    title: 'Cale install currently starts from source builds',
+    body:
+      'Cale does not ship end-user binary releases yet. The current path is to clone the repository and build from source. Future macOS-first GitHub Releases binaries can be added here without changing the page structure.',
+    actions: {
+      release: 'macOS binary',
+      archive: 'Archive download',
+      command: 'Copy command',
+    },
+    alerts: {
+      release: 'GitHub Releases based binary downloads are not available yet.',
+      archive: 'Source archive and platform archive downloads will be connected in a release round.',
+      command: 'Command copy is not wired yet. For now, run the command shown on the page.',
+    },
+    tabs: [
+      {
+        key: 'source',
+        label: 'Source',
+        title: 'Recommended path: source build',
+        body:
+          'This is the most accurate install path today. Build the compiler and check Lacail and Qstar through their Makefile boundaries.',
+      },
+      {
+        key: 'release',
+        label: 'Release',
+        title: 'Planned path: GitHub Releases',
+        body:
+          'The first binary path is expected to be macOS, with Linux and Windows artifacts added as the platform story matures.',
+      },
+      {
+        key: 'developer',
+        label: 'Developer build',
+        title: 'Developer path: full checks and subproject checks',
+        body:
+          'This path is for contributors who want to verify the compiler and standalone tools separately.',
+      },
+    ],
+    platforms: [
+      ['macOS', 'Primary', 'Source build path today. Planned first binary release target.'],
+      ['Linux', 'Expanding', 'Compile/check boundaries first, then broader ELF and platform support.'],
+      ['Windows', 'Compile stub', 'COFF and platform diagnostics are expected to grow gradually.'],
+    ],
+    tools: [
+      ['Cale compiler', 'root Makefile', 'Source build path through root make and check targets.'],
+      ['Lacail', 'lacail/Makefile', 'Standalone debugger project checked through its own Makefile.'],
+      ['Qstar', 'qstar/Makefile', 'Separate adjacent tool checked through its own Makefile.'],
+    ],
+    commands: [
+      {
+        title: 'Clone',
+        lines: [`git clone ${repoUrl}`, 'cd cale'],
+      },
+      {
+        title: 'Cale compiler',
+        lines: ['make', 'make check'],
+      },
+      {
+        title: 'Standalone tools',
+        lines: ['make -C lacail check', 'make -C qstar check'],
+      },
+    ],
+    future: [
+      'When release binaries exist, the Release tab will add curl commands and archive buttons.',
+      'The source build path remains the fallback for platforms without binary artifacts.',
+      'Lacail and Qstar stay visible as separate tool build states instead of being folded into Cale core.',
+    ],
+  },
+  ja: {
+    status: 'Source build only',
+    title: 'Cale install content is being prepared',
+    body:
+      'Japanese install documentation is still a placeholder. The current install path is source build first, with future GitHub Releases based binaries planned.',
+    actions: {
+      release: 'macOS binary',
+      archive: 'Archive download',
+      command: 'Copy command',
+    },
+    alerts: {
+      release: 'GitHub Releases based binary downloads are not available yet.',
+      archive: 'Archive downloads will be connected later.',
+      command: 'Command copy is not wired yet.',
+    },
+    tabs: [
+      {
+        key: 'source',
+        label: 'Source',
+        title: 'Source build first',
+        body: 'Use the repository and Makefile based build path while Japanese content is prepared.',
+      },
+      {
+        key: 'release',
+        label: 'Release',
+        title: 'GitHub Releases planned',
+        body: 'Binary releases are planned for a later round.',
+      },
+      {
+        key: 'developer',
+        label: 'Developer build',
+        title: 'Developer checks',
+        body: 'Compiler and standalone tool checks stay separated.',
+      },
+    ],
+    platforms: [
+      ['macOS', 'Primary', 'Source build now. Binary release planned first.'],
+      ['Linux', 'Expanding', 'Compile/check path first.'],
+      ['Windows', 'Compile stub', 'Stable diagnostics first.'],
+    ],
+    tools: [
+      ['Cale compiler', 'root Makefile', 'root make and check targets.'],
+      ['Lacail', 'lacail/Makefile', 'Standalone Makefile check.'],
+      ['Qstar', 'qstar/Makefile', 'Standalone Makefile check.'],
+    ],
+    commands: [
+      {
+        title: 'Clone',
+        lines: [`git clone ${repoUrl}`, 'cd cale'],
+      },
+      {
+        title: 'Cale compiler',
+        lines: ['make', 'make check'],
+      },
+      {
+        title: 'Standalone tools',
+        lines: ['make -C lacail check', 'make -C qstar check'],
+      },
+    ],
+    future: [
+      'Japanese install content will be expanded later.',
+      'Release binary commands will be added when artifacts exist.',
+      'Source build remains the current entry point.',
+    ],
+  },
+} satisfies Record<Locale, {
+  status: string;
+  title: string;
+  body: string;
+  actions: Record<'release' | 'archive' | 'command', string>;
+  alerts: Record<'release' | 'archive' | 'command', string>;
+  tabs: Array<{ key: string; label: string; title: string; body: string }>;
+  platforms: Array<[string, string, string]>;
+  tools: Array<[string, string, string]>;
+  commands: Array<{ title: string; lines: string[] }>;
+  future: string[];
+}>;
+
+const t = copy[locale];
+---
+
+<div class="cale-install" data-cale-install>
+  <section class="cale-install-hero" aria-labelledby={`cale-install-title-${locale}`}>
+    <div>
+      <p class="cale-install-kicker">{t.status}</p>
+      <h2 id={`cale-install-title-${locale}`}>{t.title}</h2>
+      <p>{t.body}</p>
+    </div>
+    <div class="cale-install-actions" aria-label="release actions">
+      <button type="button" data-install-alert data-alert={t.alerts.release}>{t.actions.release}</button>
+      <button type="button" data-install-alert data-alert={t.alerts.archive}>{t.actions.archive}</button>
+    </div>
+  </section>
+
+  <section class="cale-install-tabs" aria-label="install modes">
+    <div class="cale-tab-list" role="tablist" aria-label="install mode">
+      {t.tabs.map((tab, index) => (
+        <button
+          id={`cale-tab-${locale}-${tab.key}`}
+          type="button"
+          role="tab"
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls={`cale-panel-${locale}-${tab.key}`}
+          tabindex={index === 0 ? '0' : '-1'}
+          data-install-tab={tab.key}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+
+    {t.tabs.map((tab, index) => (
+      <article
+        id={`cale-panel-${locale}-${tab.key}`}
+        class="cale-tab-panel"
+        role="tabpanel"
+        aria-labelledby={`cale-tab-${locale}-${tab.key}`}
+        data-install-panel={tab.key}
+        hidden={index !== 0}
+      >
+        <h3>{tab.title}</h3>
+        <p>{tab.body}</p>
+        {tab.key === 'release' && (
+          <div class="cale-release-placeholder-actions">
+            <button type="button" data-install-alert data-alert={t.alerts.release}>{t.actions.release}</button>
+            <button type="button" data-install-alert data-alert={t.alerts.archive}>{t.actions.archive}</button>
+          </div>
+        )}
+        {tab.key === 'developer' && (
+          <div class="cale-release-placeholder-actions">
+            <button type="button" data-install-alert data-alert={t.alerts.archive}>dev artifact</button>
+          </div>
+        )}
+      </article>
+    ))}
+  </section>
+
+  <section class="cale-install-grid" aria-label="platform and project status">
+    <article>
+      <h3>Platform status</h3>
+      <table class="cale-install-table">
+        <thead>
+          <tr>
+            <th>Platform</th>
+            <th>Status</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {t.platforms.map(([platform, status, note]) => (
+            <tr>
+              <td>{platform}</td>
+              <td>{status}</td>
+              <td>{note}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </article>
+
+    <article>
+      <h3>Project status</h3>
+      <table class="cale-install-table">
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Boundary</th>
+            <th>Install/build status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {t.tools.map(([project, boundary, status]) => (
+            <tr>
+              <td>{project}</td>
+              <td>{boundary}</td>
+              <td>{status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+  <section class="cale-command-stack" aria-label="source build commands">
+    {t.commands.map((group) => (
+      <article class="cale-command-card">
+        <div>
+          <h3>{group.title}</h3>
+          <button type="button" data-install-alert data-alert={t.alerts.command}>{t.actions.command}</button>
+        </div>
+        <pre><code>{group.lines.join('\n')}</code></pre>
+      </article>
+    ))}
+  </section>
+
+  <section class="cale-install-next" aria-label="future release path">
+    <h3>Release-ready shape</h3>
+    <ul>
+      {t.future.map((item) => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </section>
+</div>
+
+<script is:inline>
+  document.querySelectorAll('[data-cale-install]').forEach((root) => {
+    if (root.dataset.caleInstallBound === 'true') return;
+    root.dataset.caleInstallBound = 'true';
+
+    const tabs = Array.from(root.querySelectorAll('[data-install-tab]'));
+    const panels = Array.from(root.querySelectorAll('[data-install-panel]'));
+
+    tabs.forEach((button) => {
+      button.addEventListener('click', () => {
+        const key = button.getAttribute('data-install-tab');
+        tabs.forEach((tab) => {
+          const selected = tab.getAttribute('data-install-tab') === key;
+          tab.setAttribute('aria-selected', String(selected));
+          tab.setAttribute('tabindex', selected ? '0' : '-1');
+        });
+        panels.forEach((panel) => {
+          panel.hidden = panel.getAttribute('data-install-panel') !== key;
+        });
+      });
+    });
+
+    root.querySelectorAll('[data-install-alert]').forEach((button) => {
+      button.addEventListener('click', () => {
+        window.alert(button.getAttribute('data-alert') || 'Release integration is not available yet.');
+      });
+    });
+  });
+</script>

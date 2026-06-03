@@ -1050,6 +1050,255 @@ html:root:not([data-has-sidebar]) {
   }
 }
 
+.cale-install {
+  display: grid;
+  gap: 1.6rem;
+  margin-block: 1.25rem 2.5rem;
+}
+
+.cale-install :is(h2, h3, p) {
+  letter-spacing: 0;
+}
+
+.cale-install-hero,
+.cale-install-tabs,
+.cale-install-grid > article,
+.cale-command-card,
+.cale-install-next {
+  border: 1px solid color-mix(in srgb, var(--cale-primary) 14%, var(--cale-border));
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cale-surface) 94%, transparent), color-mix(in srgb, var(--cale-surface-muted) 44%, transparent)),
+    var(--cale-surface);
+  box-shadow: 0 16px 40px rgba(23, 35, 28, 0.06);
+}
+
+.cale-install-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.5rem;
+  align-items: center;
+  padding: clamp(1.15rem, 3vw, 1.75rem);
+}
+
+.cale-install-kicker {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0 0 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--cale-primary) 24%, var(--cale-border));
+  border-radius: 999px;
+  padding: 0.24rem 0.65rem;
+  background: color-mix(in srgb, var(--cale-primary-low) 70%, var(--cale-surface));
+  color: var(--cale-primary);
+  font-size: 0.78rem;
+  font-weight: 760;
+  line-height: 1.4;
+}
+
+.cale-install-hero h2,
+.cale-tab-panel h3,
+.cale-install-grid h3,
+.cale-command-card h3,
+.cale-install-next h3 {
+  margin: 0;
+  color: var(--cale-text);
+}
+
+.cale-install-hero p,
+.cale-tab-panel p,
+.cale-install-next li {
+  color: var(--cale-text-muted);
+}
+
+.cale-install-actions,
+.cale-release-placeholder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.cale-install button {
+  min-height: 2.35rem;
+  border: 1px solid color-mix(in srgb, var(--cale-primary) 24%, var(--cale-border));
+  border-radius: 999px;
+  padding-inline: 0.9rem;
+  background: var(--cale-surface);
+  color: var(--cale-primary);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 720;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+.cale-install button:hover {
+  border-color: var(--cale-primary);
+  background: var(--cale-primary-low);
+  color: var(--cale-primary-hover);
+}
+
+.cale-install-actions button:first-child,
+.cale-release-placeholder-actions button:first-child {
+  border-color: var(--cale-primary);
+  background: var(--cale-primary);
+  color: #ffffff;
+}
+
+.cale-install-actions button:first-child:hover,
+.cale-release-placeholder-actions button:first-child:hover {
+  background: var(--cale-primary-hover);
+}
+
+.cale-install-tabs {
+  overflow: hidden;
+}
+
+.cale-tab-list {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--cale-border);
+  padding: 0.65rem;
+  background: color-mix(in srgb, var(--cale-surface-muted) 64%, var(--cale-surface));
+}
+
+.cale-tab-list button {
+  border-radius: 0.4rem;
+  background: transparent;
+}
+
+.cale-tab-list button[aria-selected="true"] {
+  border-color: color-mix(in srgb, var(--cale-primary) 32%, var(--cale-border));
+  background: var(--cale-surface);
+  color: var(--cale-text);
+  box-shadow: 0 8px 22px rgba(23, 35, 28, 0.06);
+}
+
+.cale-tab-panel {
+  display: grid;
+  gap: 0.8rem;
+  padding: clamp(1rem, 3vw, 1.4rem);
+}
+
+.cale-install-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.cale-install-grid > article {
+  overflow: hidden;
+  padding: 1.1rem;
+}
+
+.cale-install-table {
+  width: 100%;
+  margin-top: 0.9rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.cale-install-table th,
+.cale-install-table td {
+  border-bottom: 1px solid color-mix(in srgb, var(--cale-border) 72%, transparent);
+  padding: 0.72rem 0.55rem;
+  text-align: start;
+  vertical-align: top;
+}
+
+.cale-install-table th {
+  color: var(--cale-text);
+  font-size: 0.76rem;
+  font-weight: 780;
+  text-transform: uppercase;
+}
+
+.cale-install-table td {
+  color: var(--cale-text-muted);
+}
+
+.cale-command-stack {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.cale-command-card {
+  overflow: hidden;
+}
+
+.cale-command-card > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--cale-border);
+  padding: 0.85rem 1rem;
+}
+
+.cale-command-card pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 1rem;
+  background:
+    radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--cale-primary) 12%, transparent), transparent 34%),
+    #101915;
+  color: #e7f4ee;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  overflow-x: auto;
+}
+
+.cale-command-card code {
+  background: transparent;
+  color: inherit;
+}
+
+.cale-install-next {
+  border-inline-start: 0.25rem solid var(--cale-orange);
+  padding: 1.1rem 1.2rem;
+}
+
+.cale-install-next ul {
+  margin-bottom: 0;
+}
+
+:root[data-theme="dark"] .cale-install-hero,
+:root[data-theme="dark"] .cale-install-tabs,
+:root[data-theme="dark"] .cale-install-grid > article,
+:root[data-theme="dark"] .cale-command-card,
+:root[data-theme="dark"] .cale-install-next {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cale-surface) 88%, transparent), color-mix(in srgb, var(--cale-surface-muted) 58%, transparent)),
+    var(--cale-surface);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+:root[data-theme="dark"] .cale-command-card pre {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(66, 201, 133, 0.14), transparent 34%),
+    #050b08;
+}
+
+@media (max-width: 58rem) {
+  .cale-install-hero,
+  .cale-install-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cale-install-actions {
+    justify-content: flex-start;
+  }
+
+  .cale-tab-list {
+    overflow-x: auto;
+  }
+
+  .cale-command-card > div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
 .cale-footer {
   flex-direction: column;
   gap: 1.35rem;
