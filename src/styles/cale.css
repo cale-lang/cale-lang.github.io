@@ -449,14 +449,22 @@ html:root:not([data-has-sidebar]) {
     min-height: 0;
     border-bottom-color: color-mix(in srgb, var(--cale-primary) 16%, var(--cale-border));
     background:
+      radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--cale-primary) 13%, transparent), transparent 36%),
+      radial-gradient(circle at 58% 56%, color-mix(in srgb, var(--cale-cyan) 9%, transparent), transparent 42%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(240, 247, 242, 0.84)),
       var(--cale-bg);
   }
 
   :root[data-theme="dark"] .cale-hero-frame {
     background:
+      radial-gradient(circle at 50% 44%, rgba(66, 201, 133, 0.16), transparent 38%),
+      radial-gradient(circle at 58% 58%, rgba(125, 225, 232, 0.1), transparent 44%),
       linear-gradient(180deg, rgba(13, 25, 20, 0.86), rgba(7, 16, 13, 0.96)),
       var(--cale-bg);
+  }
+
+  .cale-hero-content {
+    z-index: 3;
   }
 
   .cale-hero-frame::before {
@@ -471,17 +479,47 @@ html:root:not([data-has-sidebar]) {
   }
 
   .orbit-signal {
-    top: 50%;
-    right: -4.8rem;
-    width: min(18rem, 74vw);
-    transform: translateY(-42%);
-    opacity: 0.16;
+    top: 48%;
+    right: auto;
+    left: 50%;
+    z-index: 1;
+    width: min(30rem, 118vw);
+    filter: blur(7px) saturate(1.2);
+    opacity: 0.22;
+    pointer-events: none;
+    transform: translate(-50%, -50%) rotate(-7deg) scale(1.04);
+  }
+
+  .orbit-signal::before,
+  .orbit-signal::after {
+    position: absolute;
+    content: "";
+    border-radius: 999px;
     pointer-events: none;
   }
 
+  .orbit-signal::before {
+    inset: 12%;
+    background:
+      radial-gradient(circle, color-mix(in srgb, var(--cale-primary) 34%, transparent), transparent 48%),
+      radial-gradient(circle at 64% 46%, color-mix(in srgb, var(--cale-orange) 18%, transparent), transparent 36%);
+    filter: blur(22px);
+    opacity: 0.58;
+  }
+
+  .orbit-signal::after {
+    inset: 25%;
+    border: 1px solid color-mix(in srgb, var(--cale-primary) 20%, transparent);
+    box-shadow:
+      0 0 52px color-mix(in srgb, var(--cale-primary) 18%, transparent),
+      0 0 96px color-mix(in srgb, var(--cale-cyan) 10%, transparent);
+  }
+
   .orbit-core {
-    width: 3.35rem;
-    font-size: 1.35rem;
+    width: 4.2rem;
+    background: color-mix(in srgb, var(--cale-surface) 70%, transparent);
+    color: color-mix(in srgb, var(--cale-primary) 86%, var(--cale-text));
+    font-size: 1.55rem;
     box-shadow: none;
   }
 
@@ -494,8 +532,9 @@ html:root:not([data-has-sidebar]) {
   }
 
   .orbit-node {
-    padding: 0.18rem 0.36rem;
-    font-size: 0.62rem;
+    background: color-mix(in srgb, var(--cale-surface) 58%, transparent);
+    padding: 0.24rem 0.45rem;
+    font-size: 0.66rem;
     box-shadow: none;
   }
 
@@ -504,6 +543,8 @@ html:root:not([data-has-sidebar]) {
   }
 
   .cale-hero-content .hero {
+    position: relative;
+    z-index: 3;
     min-height: 0;
     grid-template-columns: 1fr;
     padding-block: clamp(3.15rem, 12vw, 4.25rem) clamp(2rem, 8vw, 2.8rem);
@@ -512,12 +553,16 @@ html:root:not([data-has-sidebar]) {
 
   .cale-hero-content .stack,
   .cale-hero-content .copy {
+    position: relative;
+    z-index: 2;
     align-items: flex-start;
     gap: 0.85rem;
     text-align: left;
   }
 
   .cale-hero-content .actions {
+    position: relative;
+    z-index: 2;
     justify-content: flex-start;
     gap: 0.7rem;
   }
@@ -525,17 +570,48 @@ html:root:not([data-has-sidebar]) {
   .cale-hero-content .hero h1 {
     font-size: clamp(2.35rem, 14vw, 3rem);
     line-height: 1.03;
+    text-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9),
+      0 0 26px rgba(251, 253, 249, 0.95);
   }
 
   .cale-hero-content .tagline {
     max-width: 24rem;
     font-size: 0.98rem;
     line-height: 1.68;
+    text-shadow: 0 0 24px rgba(251, 253, 249, 0.96);
   }
 
   .cale-hero-content .sl-link-button {
     min-height: 2.6rem;
     padding-inline: 1.05rem;
+  }
+
+  :root[data-theme="dark"] .cale-hero-content .hero h1,
+  :root[data-theme="dark"] .cale-hero-content .tagline {
+    text-shadow:
+      0 1px 0 rgba(0, 0, 0, 0.28),
+      0 0 28px rgba(7, 16, 13, 0.86);
+  }
+}
+
+@media (max-width: 38rem) {
+  .orbit-signal {
+    top: 49%;
+    width: min(26rem, 128vw);
+    filter: blur(9px) saturate(1.18);
+    opacity: 0.24;
+    transform: translate(-50%, -50%) rotate(-9deg) scale(1.08);
+  }
+
+  .orbit-signal::before {
+    inset: 8%;
+    filter: blur(26px);
+    opacity: 0.68;
+  }
+
+  .cale-hero-content .hero {
+    padding-block: clamp(3rem, 11vw, 3.8rem) clamp(1.85rem, 7vw, 2.45rem);
   }
 }
 
