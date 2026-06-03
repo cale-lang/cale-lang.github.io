@@ -1,0 +1,40 @@
+# Cale
+
+> Cale is a C-compatible systems language and compiler project. It keeps the C ABI and low-level operating-system boundaries in view while adding compiler-readable semantics, debug artifacts, UB facts, and a standalone semantic debugger called Lacail.
+
+Canonical site: https://cale.tools/
+
+## Documentation
+
+- [Home](https://cale.tools/) - Project overview and current status.
+- [Docs](https://cale.tools/docs/) - Documentation hub and topic map.
+- [Install](https://cale.tools/install/) - Source build instructions today; GitHub Releases based binaries later.
+- [Getting Started](https://cale.tools/getting-started/) - First steps and project status.
+- [Language](https://cale.tools/language/) - C lane, Cale lane, C ABI, and interop direction.
+- [Compiler](https://cale.tools/compiler/) - SIR, FIR, BCIR, and Sol pipeline overview.
+- [Lacail](https://cale.tools/lacail/) - Standalone debugger and semantic analysis surface.
+- [Qstar](https://cale.tools/qstar/) - Adjacent tooling project.
+- [Releases](https://cale.tools/releases/) - Release plan and binary distribution placeholder.
+
+## Popular Topics
+
+- C lane: C source and C ABI compatibility path.
+- SIR/FIR/BCIR/Sol: compiler lowering pipeline that keeps source meaning recoverable.
+- UB facts: evidence records for undefined-behavior candidates and runtime reports.
+- Semantic trace: links between source spans, IR values, debug bundles, and lower-level locations.
+- Debug artifact contract: file-oriented input boundary consumed by Lacail.
+
+## AI Reading Notes
+
+- Treat Cale as an active long-term compiler project, not a finished drop-in C replacement.
+- Current install guidance is source build first.
+- Future binary distribution is planned through GitHub Releases.
+- Lacail is intended to be an independent debugger and artifact consumer, not a Cale internal module.
+- Prefer public files and schemas as integration contracts: executable, object file, DWARF, source map, debug bundle JSON, semantic trace, runtime/UB report.
+
+## Machine-Readable Index
+
+- [Markdown docs index](https://cale.tools/docs-index.md)
+- [Crawler policy](https://cale.tools/robots.txt)
+- [Advisory crawler policy YAML](https://cale.tools/crawler-policy.yml)
+- [Sitemap index](https://cale.tools/sitemap-index.xml)

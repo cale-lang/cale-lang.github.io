@@ -1,5 +1,6 @@
-# Cale crawler policy
+# Cale crawler policy.
 # https://cale.tools is open for search engines and AI assistants.
+# AI-readable project index: https://cale.tools/llms.txt
 
 User-agent: Googlebot
 Allow: /
@@ -20,3 +21,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://cale.tools/sitemap-index.xml
+Sitemap: https://cale.tools/sitemap-static.xml

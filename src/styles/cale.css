@@ -1299,6 +1299,185 @@ html:root:not([data-has-sidebar]) {
   }
 }
 
+.cale-docs-landing {
+  display: grid;
+  gap: 1.35rem;
+  margin-block: 1.25rem 2.75rem;
+}
+
+.cale-docs-hero,
+.cale-docs-card,
+.cale-docs-topics,
+.cale-docs-ai {
+  border: 1px solid color-mix(in srgb, var(--cale-primary) 14%, var(--cale-border));
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cale-surface) 96%, transparent), color-mix(in srgb, var(--cale-surface-muted) 42%, transparent)),
+    var(--cale-surface);
+  box-shadow: 0 16px 42px rgba(23, 35, 28, 0.055);
+}
+
+.cale-docs-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+.cale-docs-hero::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(19rem, 56%);
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--cale-primary), var(--cale-orange));
+}
+
+.cale-docs-hero h2,
+.cale-docs-topics h2,
+.cale-docs-ai h2 {
+  margin: 0;
+  color: var(--cale-text);
+  letter-spacing: 0;
+}
+
+.cale-docs-hero p,
+.cale-docs-card p,
+.cale-docs-ai p,
+.cale-docs-ai span,
+.cale-docs-topics dd {
+  color: var(--cale-text-muted);
+}
+
+.cale-docs-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.cale-docs-card {
+  display: grid;
+  gap: 0.55rem;
+  min-height: 9.25rem;
+  padding: 1rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cale-docs-card:hover {
+  border-color: color-mix(in srgb, var(--cale-primary) 38%, var(--cale-border));
+  background:
+    radial-gradient(circle at 88% 18%, color-mix(in srgb, var(--cale-primary) 10%, transparent), transparent 32%),
+    var(--cale-surface);
+  transform: translateY(-1px);
+}
+
+.cale-docs-card span {
+  color: var(--cale-text);
+  font-size: 1.08rem;
+  font-weight: 780;
+}
+
+.cale-docs-card p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.62;
+}
+
+.cale-docs-topics,
+.cale-docs-ai {
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.38fr) minmax(0, 1fr);
+  gap: 1.2rem;
+  padding: 1.1rem;
+}
+
+.cale-docs-topics dl {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+}
+
+.cale-docs-topics dl > div {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 0.35fr) 1fr;
+  gap: 0.9rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--cale-border) 70%, transparent);
+  padding-bottom: 0.65rem;
+}
+
+.cale-docs-topics dl > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.cale-docs-topics dt {
+  color: var(--cale-primary);
+  font-weight: 760;
+}
+
+.cale-docs-topics dd {
+  margin: 0;
+}
+
+.cale-docs-ai {
+  border-inline-start: 0.25rem solid var(--cale-primary);
+}
+
+.cale-docs-ai-links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.cale-docs-ai-links a {
+  display: grid;
+  gap: 0.25rem;
+  border: 1px solid color-mix(in srgb, var(--cale-primary) 16%, var(--cale-border));
+  border-radius: 0.45rem;
+  padding: 0.75rem;
+  background: color-mix(in srgb, var(--cale-surface) 86%, transparent);
+  color: var(--cale-text);
+  text-decoration: none;
+}
+
+.cale-docs-ai-links a:hover {
+  border-color: var(--cale-primary);
+  background: color-mix(in srgb, var(--cale-primary-low) 58%, var(--cale-surface));
+}
+
+.cale-docs-ai-links strong {
+  color: var(--cale-primary);
+}
+
+:root[data-theme="dark"] .cale-docs-hero,
+:root[data-theme="dark"] .cale-docs-card,
+:root[data-theme="dark"] .cale-docs-topics,
+:root[data-theme="dark"] .cale-docs-ai {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--cale-surface) 88%, transparent), color-mix(in srgb, var(--cale-surface-muted) 58%, transparent)),
+    var(--cale-surface);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 58rem) {
+  .cale-docs-card-grid,
+  .cale-docs-topics,
+  .cale-docs-ai,
+  .cale-docs-ai-links {
+    grid-template-columns: 1fr;
+  }
+
+  .cale-docs-card {
+    min-height: auto;
+  }
+
+  .cale-docs-topics dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+}
+
 .cale-footer {
   flex-direction: column;
   gap: 1.35rem;
