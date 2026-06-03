@@ -261,7 +261,13 @@ body {
 }
 
 html:root:not([data-has-sidebar]) {
-  --sl-content-width: min(82rem, calc(100vw - 5rem));
+  --sl-content-width: min(82rem, calc(100vw - 2rem));
+}
+
+@media (min-width: 50rem) {
+  html:root:not([data-has-sidebar]) {
+    --sl-content-width: min(82rem, calc(100vw - 5rem));
+  }
 }
 
 :root[data-theme="dark"] .cale-hero-frame {
@@ -439,19 +445,110 @@ html:root:not([data-has-sidebar]) {
 }
 
 @media (max-width: 58rem) {
+  .cale-hero-frame {
+    min-height: 0;
+    border-bottom-color: color-mix(in srgb, var(--cale-primary) 16%, var(--cale-border));
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(240, 247, 242, 0.84)),
+      var(--cale-bg);
+  }
+
+  :root[data-theme="dark"] .cale-hero-frame {
+    background:
+      linear-gradient(180deg, rgba(13, 25, 20, 0.86), rgba(7, 16, 13, 0.96)),
+      var(--cale-bg);
+  }
+
+  .cale-hero-frame::before {
+    background-size: 42px 42px;
+    opacity: 0.78;
+    mask-image: linear-gradient(180deg, black, transparent 92%);
+  }
+
+  .cale-hero-frame::after {
+    width: min(15rem, 72vw);
+    height: 2px;
+  }
+
   .orbit-signal {
-    right: -8rem;
-    width: 24rem;
-    opacity: 0.22;
+    top: 50%;
+    right: -4.8rem;
+    width: min(18rem, 74vw);
+    transform: translateY(-42%);
+    opacity: 0.16;
+    pointer-events: none;
+  }
+
+  .orbit-core {
+    width: 3.35rem;
+    font-size: 1.35rem;
+    box-shadow: none;
+  }
+
+  .orbit-ring {
+    border-color: color-mix(in srgb, var(--cale-primary) 18%, transparent);
+  }
+
+  .orbit-ring-b {
+    opacity: 0.66;
+  }
+
+  .orbit-node {
+    padding: 0.18rem 0.36rem;
+    font-size: 0.62rem;
+    box-shadow: none;
+  }
+
+  .orbit-scanline {
+    display: none;
   }
 
   .cale-hero-content .hero {
-    min-height: 26rem;
-    padding-inline: clamp(1.25rem, 6vw, 2rem);
+    min-height: 0;
+    grid-template-columns: 1fr;
+    padding-block: clamp(3.15rem, 12vw, 4.25rem) clamp(2rem, 8vw, 2.8rem);
+    padding-inline: clamp(1.35rem, 6vw, 2rem);
+  }
+
+  .cale-hero-content .stack,
+  .cale-hero-content .copy {
+    align-items: flex-start;
+    gap: 0.85rem;
+    text-align: left;
+  }
+
+  .cale-hero-content .actions {
+    justify-content: flex-start;
+    gap: 0.7rem;
+  }
+
+  .cale-hero-content .hero h1 {
+    font-size: clamp(2.35rem, 14vw, 3rem);
+    line-height: 1.03;
   }
 
   .cale-hero-content .tagline {
-    font-size: 1rem;
+    max-width: 24rem;
+    font-size: 0.98rem;
+    line-height: 1.68;
+  }
+
+  .cale-hero-content .sl-link-button {
+    min-height: 2.6rem;
+    padding-inline: 1.05rem;
+  }
+}
+
+@media (max-width: 25rem) {
+  .cale-hero-content .actions {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cale-hero-content .sl-link-button {
+    justify-content: center;
+    width: 100%;
   }
 }
 
