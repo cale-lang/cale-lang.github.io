@@ -1,0 +1,91 @@
+---
+import { categoryLabels, getBlogPostPath, getBlogPosts, type BlogLocale } from '../lib/blog';
+
+const { locale = 'ko' } = Astro.props as { locale?: BlogLocale };
+
+let posts = await getBlogPosts(locale);
+const postLocale = posts.length > 0 ? locale : 'ko';
+if (posts.length === 0) {
+  posts = await getBlogPosts('ko');
+}
+
+const dateFormatter = new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : locale === 'ja' ? 'ja-JP' : 'en-US', {
+  dateStyle: 'long',
+});
+
+const categoryCounts = posts.reduce<Record<string, number>>((acc, post) => {
+  acc[post.data.category] = (acc[post.data.category] ?? 0) + 1;
+  return acc;
+}, {});
+
+const copy = {
+  ko: {
+    eyebrow: 'Development journal',
+    title: '개발 기록',
+    description:
+      'Cale의 개발 기록, 설계 결정, Lacail 진행 상황, release note를 한곳에 모읍니다. 아직은 초기 글 묶음이지만, 앞으로 compiler와 language 설계 변경을 계속 기록하는 피드가 됩니다.',
+    categories: 'Categories',
+    fallback: '이 언어의 blog 글은 준비 중입니다. 현재는 한국어 개발 기록을 함께 보여줍니다.',
+  },
+  en: {
+    eyebrow: 'Development journal',
+    title: 'Development notes',
+    description:
+      'Design decisions, compiler notes, Lacail progress, and release planning live here. The feed starts small, then grows with the language and compiler.',
+    categories: 'Categories',
+    fallback: 'English blog posts are being prepared. Korean development notes are shown for now.',
+  },
+  ja: {
+    eyebrow: 'Development journal',
+    title: 'Development notes',
+    description:
+      'Japanese blog content is being prepared. For now, this page keeps the same feed structure and shows Korean development notes.',
+    categories: 'Categories',
+    fallback: 'Japanese blog posts are being prepared. Korean development notes are shown for now.',
+  },
+}[locale];
+---
+
+<div class="cale-blog-index">
+  <section class="cale-blog-hero" aria-labelledby={`cale-blog-title-${locale}`}>
+    <p class="cale-section-eyebrow">{copy.eyebrow}</p>
+    <h2 id={`cale-blog-title-${locale}`}>{copy.title}</h2>
+    <p>{copy.description}</p>
+    <div class="cale-blog-feed-links" aria-label="feeds">
+      <a href="/rss.xml">RSS</a>
+      <a href="/feed.json">JSON Feed</a>
+    </div>
+  </section>
+
+  <section class="cale-blog-layout" aria-label="blog posts">
+    <aside class="cale-blog-categories" aria-label="blog categories">
+      <h3>{copy.categories}</h3>
+      <dl>
+        {Object.entries(categoryLabels).map(([key, label]) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{categoryCounts[key] ?? 0}</dd>
+          </div>
+        ))}
+      </dl>
+    </aside>
+
+    <div class="cale-blog-post-list">
+      {postLocale !== locale && (
+        <p class="cale-blog-language-note">
+          {copy.fallback}
+        </p>
+      )}
+      {posts.map((post) => (
+        <article class="cale-blog-row">
+          <a href={getBlogPostPath(post, locale)}>
+            <span>{categoryLabels[post.data.category] ?? post.data.category}</span>
+            <h3>{post.data.title}</h3>
+            <p>{post.data.description}</p>
+            <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</div>

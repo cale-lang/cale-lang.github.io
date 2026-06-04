@@ -12,4 +12,22 @@
   <url>
     <loc>https://cale.tools/crawler-policy.yml</loc>
   </url>
+  <url>
+    <loc>https://cale.tools/rss.xml</loc>
+  </url>
+  <url>
+    <loc>https://cale.tools/feed.json</loc>
+  </url>
+  <url>
+    <loc>https://cale.tools/blog/c-abi-coexist/</loc>
+  </url>
+  <url>
+    <loc>https://cale.tools/blog/compiler-pipeline-overview/</loc>
+  </url>
+  <url>
+    <loc>https://cale.tools/blog/lacail-standalone-debugger/</loc>
+  </url>
+  <url>
+    <loc>https://cale.tools/blog/github-releases-plan/</loc>
+  </url>
 </urlset>

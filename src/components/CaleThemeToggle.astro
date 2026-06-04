@@ -1,0 +1,56 @@
+---
+const label = Astro.locals.t('themeSelect.accessibleLabel');
+---
+
+<cale-theme-toggle>
+  <button type="button" class="cale-theme-toggle" aria-label={label} title={label}>
+    <span class="material-symbols-rounded" aria-hidden="true" data-theme-icon>light_mode</span>
+  </button>
+</cale-theme-toggle>
+
+<script>
+  type Theme = 'dark' | 'light';
+
+  const storageKey = 'starlight-theme';
+
+  const parseTheme = (value: string | null): Theme =>
+    value === 'dark' || value === 'light' ? value : 'light';
+
+  const currentTheme = (): Theme =>
+    parseTheme(document.documentElement.dataset.theme ?? localStorage.getItem(storageKey));
+
+  const applyTheme = (theme: Theme) => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem(storageKey, theme);
+    document.querySelectorAll('cale-theme-toggle').forEach((toggle) => {
+      const icon = toggle.querySelector<HTMLElement>('[data-theme-icon]');
+      const button = toggle.querySelector<HTMLButtonElement>('button');
+      if (icon) icon.textContent = theme === 'dark' ? 'dark_mode' : 'light_mode';
+      if (button) {
+        button.dataset.theme = theme;
+        button.setAttribute(
+          'aria-label',
+          theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+        );
+        button.setAttribute(
+          'title',
+          theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
+        );
+      }
+    });
+  };
+
+  class CaleThemeToggle extends HTMLElement {
+    connectedCallback() {
+      const button = this.querySelector('button');
+      applyTheme(currentTheme());
+      button?.addEventListener('click', () => {
+        applyTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+      });
+    }
+  }
+
+  if (!customElements.get('cale-theme-toggle')) {
+    customElements.define('cale-theme-toggle', CaleThemeToggle);
+  }
+</script>

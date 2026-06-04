@@ -1,0 +1,39 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { render, type CollectionEntry } from 'astro:content';
+import { categoryLabels, type BlogLocale } from '../lib/blog';
+
+type BlogPost = CollectionEntry<'blog'>;
+
+const { post, locale = 'ko' } = Astro.props as { post: BlogPost; locale?: BlogLocale };
+const { Content } = await render(post);
+const dateFormatter = new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : locale === 'ja' ? 'ja-JP' : 'en-US', {
+  dateStyle: 'long',
+});
+
+const fallbackText = {
+  ko: '이 글은 아직 번역 전입니다. 현재 한국어 원문을 표시합니다.',
+  en: 'This post has not been translated yet. The Korean original is shown for now.',
+  ja: 'This post has not been translated yet. The Korean original is shown for now.',
+}[locale];
+---
+
+<StarlightPage
+  frontmatter={{
+    title: post.data.title,
+    description: post.data.description,
+  }}
+>
+  <article class="cale-blog-post">
+    <header class="cale-blog-post-header">
+      <p>{categoryLabels[post.data.category] ?? post.data.category}</p>
+      <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
+      {locale !== post.data.lang && (
+        <span class="cale-blog-language-note">
+          {fallbackText}
+        </span>
+      )}
+    </header>
+    <Content />
+  </article>
+</StarlightPage>

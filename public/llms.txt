@@ -15,6 +15,7 @@ Canonical site: https://cale.tools/
 - [Lacail](https://cale.tools/lacail/) - Standalone debugger and semantic analysis surface.
 - [Qstar](https://cale.tools/qstar/) - Adjacent tooling project.
 - [Releases](https://cale.tools/releases/) - Release plan and binary distribution placeholder.
+- [Blog](https://cale.tools/blog/) - Development journal, design notes, and release notes.
 
 ## Popular Topics
 
@@ -38,3 +39,5 @@ Canonical site: https://cale.tools/
 - [Crawler policy](https://cale.tools/robots.txt)
 - [Advisory crawler policy YAML](https://cale.tools/crawler-policy.yml)
 - [Sitemap index](https://cale.tools/sitemap-index.xml)
+- [RSS feed](https://cale.tools/rss.xml)
+- [JSON feed](https://cale.tools/feed.json)

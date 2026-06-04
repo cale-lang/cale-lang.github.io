@@ -1,0 +1,41 @@
+---
+import { categoryLabels, getBlogPostPath, getLatestBlogPosts, type BlogLocale } from '../lib/blog';
+
+const {
+  locale = 'ko',
+  title = 'Latest posts',
+  compact = false,
+} = Astro.props as {
+  locale?: BlogLocale;
+  title?: string;
+  compact?: boolean;
+};
+
+let posts = await getLatestBlogPosts(locale, compact ? 2 : 3);
+if (posts.length === 0) {
+  posts = await getLatestBlogPosts('ko', compact ? 2 : 3);
+}
+const dateFormatter = new Intl.DateTimeFormat(locale === 'ko' ? 'ko-KR' : locale === 'ja' ? 'ja-JP' : 'en-US', {
+  dateStyle: 'medium',
+});
+---
+
+<section class:list={['cale-latest-posts', compact && 'is-compact']} aria-label={title}>
+  <div class="cale-latest-posts-head">
+    <div>
+      <p class="cale-section-eyebrow">Blog</p>
+      <h2>{title}</h2>
+    </div>
+    <a href={locale === 'ko' ? '/blog/' : `/${locale}/blog/`}>View all</a>
+  </div>
+  <div class="cale-latest-posts-grid">
+    {posts.map((post) => (
+      <a class="cale-latest-post-card" href={getBlogPostPath(post, locale)}>
+        <span>{categoryLabels[post.data.category] ?? post.data.category}</span>
+        <strong>{post.data.title}</strong>
+        <p>{post.data.description}</p>
+        <time datetime={post.data.pubDate.toISOString()}>{dateFormatter.format(post.data.pubDate)}</time>
+      </a>
+    ))}
+  </div>
+</section>

@@ -28,6 +28,7 @@ export default defineConfig({
         Footer: './src/components/CaleFooter.astro',
         Header: './src/components/CaleHeader.astro',
         Hero: './src/components/CaleHero.astro',
+        ThemeSelect: './src/components/CaleThemeToggle.astro',
         ThemeProvider: './src/components/CaleThemeProvider.astro',
       },
       social: [

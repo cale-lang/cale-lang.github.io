@@ -1,4 +1,6 @@
 ---
+import CaleLatestPosts from './CaleLatestPosts.astro';
+
 type Locale = 'ko' | 'en' | 'ja';
 
 const { locale = 'ko' } = Astro.props as { locale?: Locale };
@@ -243,4 +245,6 @@ const t = copy[locale] ?? copy.ko;
     </div>
     <a class="cale-release-link" href={t.releases.href}>{t.releases.cta}</a>
   </section>
+
+  <CaleLatestPosts locale={locale} title="Latest posts" />
 </div>

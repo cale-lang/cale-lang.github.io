@@ -9,6 +9,7 @@ Cale is a C-compatible systems language and compiler project. The public documen
 - Home: <https://cale.tools/>
 - Docs hub: <https://cale.tools/docs/>
 - Install: <https://cale.tools/install/>
+- Blog: <https://cale.tools/blog/>
 - Getting Started: <https://cale.tools/getting-started/>
 - Releases: <https://cale.tools/releases/>
 
@@ -72,6 +73,8 @@ Public consumers should prefer files and schemas over Cale internal headers:
 ## Crawl And AI Entry Points
 
 - llms.txt: <https://cale.tools/llms.txt>
+- RSS feed: <https://cale.tools/rss.xml>
+- JSON feed: <https://cale.tools/feed.json>
 - robots.txt: <https://cale.tools/robots.txt>
 - crawler-policy.yml: <https://cale.tools/crawler-policy.yml>
 - sitemap index: <https://cale.tools/sitemap-index.xml>

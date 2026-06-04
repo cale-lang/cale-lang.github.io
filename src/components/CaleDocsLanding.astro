@@ -1,4 +1,6 @@
 ---
+import CaleLatestPosts from './CaleLatestPosts.astro';
+
 type Locale = 'ko' | 'en' | 'ja';
 
 const { locale = 'ko' } = Astro.props as { locale?: Locale };
@@ -200,6 +202,8 @@ const t = copy[locale];
       </a>
     ))}
   </section>
+
+  <CaleLatestPosts locale={locale} title="Latest posts" compact />
 
   <section class="cale-docs-topics" aria-label="popular topics">
     <div>
